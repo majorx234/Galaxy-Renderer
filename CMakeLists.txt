@@ -34,5 +34,5 @@ set(SRC_FILES
  TextBuffer.cpp
 )
 
-add_executable(main ${SRC_FILES} )
-target_link_libraries(main ${SDL2_LIBRARY} GLEW::GLEW ${OPENGL_LIBRARIES} ${SDL2_TTF_LIBRARY})
+add_executable(galaxy_rendere ${SRC_FILES} )
+target_link_libraries(galaxy_rendere ${SDL2_LIBRARY} GLEW::GLEW ${OPENGL_LIBRARIES} ${SDL2_TTF_LIBRARY})
