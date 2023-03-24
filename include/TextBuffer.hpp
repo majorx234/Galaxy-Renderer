@@ -6,7 +6,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-#include <SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "Types.hpp"
 

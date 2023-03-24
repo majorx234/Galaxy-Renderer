@@ -82,15 +82,15 @@ void TextBuffer::Initialize()
 	if (!TTF_WasInit())
 		TTF_Init();
 
-	_pSmallFont = TTF_OpenFont("assets/consola.ttf", 14);
+	_pSmallFont = TTF_OpenFont("/usr/share/fonts/TTF/Consolas-Regular.ttf", 14);
 	if (_pSmallFont == nullptr)
 		throw std::runtime_error(TTF_GetError());
 
-	_pFont = TTF_OpenFont("assets/arial.ttf", 18);
+	_pFont = TTF_OpenFont("/usr/share/fonts/liberation/LiberationSans-Regular.ttf", 18);
 	if (_pFont == nullptr)
 		throw std::runtime_error(TTF_GetError());
 
-	_pFontCaption = TTF_OpenFont("assets/arial.ttf", 40);
+	_pFontCaption = TTF_OpenFont("/usr/share/fonts/liberation/LiberationSans-Regular.ttf", 40);
 	if (_pFontCaption == nullptr)
 		throw std::runtime_error(TTF_GetError());
 

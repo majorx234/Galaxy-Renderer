@@ -2,7 +2,7 @@
 
 #include <cstdint>
 #include <vector>
-#include <SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "SDLWnd.hpp"
 #include "Galaxy.hpp"

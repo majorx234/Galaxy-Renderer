@@ -8,7 +8,7 @@
 #include <ctime>
 #include <cmath>
 
-#include <SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 #include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
 #include <glm/gtx/transform.hpp>
