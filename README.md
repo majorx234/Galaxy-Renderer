@@ -2,8 +2,17 @@
 [![Version](https://img.shields.io/github/release/beltoforion/Galaxy-Renderer.svg?maxAge=360)](https://github.com/beltoforion/Galaxy-Renderer/blob/master/CHANGELOG)
 [![Github All Releases](https://img.shields.io/github/downloads/beltoforion/Galaxy-Renderer/total.svg)](https://github.com/beltoforion/Galaxy-Renderer/releases/tag/v1.1.0)
 
-# Spiral Galaxy Renderer
+# Fork of Spiral Galaxy Renderer
+- add cmake build 
 
+## dependencies:
+- install sdl2, sdl2_ttf, glm, consolas-font
+
+## ToDo
+- add assets
+- better check for some dependencies (better info message)
+
+# Info
 A Program for modelling a two dimensional galaxy based on the density wave theory. This archive contains the source code for an 
 article at beltoforion.de about Simulating a Galaxy with the density wave theory.
 
