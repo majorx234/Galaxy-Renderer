@@ -59,7 +59,7 @@ void GalaxyWnd::InitGL() noexcept(false)
 	_textGalaxyLabels.Initialize();
 
 	glDisable(GL_DEPTH_TEST);
-	glClearColor(0.0f, .0f, 0.08f, 0.0f);
+	glClearColor(0.0f, .0f, 0.00f, 0.0f);
 	SetCameraOrientation({ 0, 1, 0 });
 }
 
