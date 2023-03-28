@@ -25,13 +25,13 @@ include_directories(
 	)
 
 set(SRC_FILES
- CumulativeDistributionFunction.cpp 
- Galaxy.cpp 
- GalaxyWnd.cpp 
- Helper.cpp 
- main.cpp 
- SDLWnd.cpp 
- TextBuffer.cpp
+ src/CumulativeDistributionFunction.cpp 
+ src/Galaxy.cpp 
+ src/GalaxyWnd.cpp 
+ src/Helper.cpp 
+ src/main.cpp 
+ src/SDLWnd.cpp 
+ src/TextBuffer.cpp
 )
 
 add_executable(galaxy_rendere ${SRC_FILES} )
