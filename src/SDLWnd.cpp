@@ -18,6 +18,7 @@
 #include "SDL_events.h"
 #include "SDL_mouse.h"
 #include "SDL_shape.h"
+#include "SDL_timer.h"
 #include "SDL_video.h"
 
 
@@ -47,7 +48,6 @@ SDLWindow::SDLWindow()
 	, _matProjection()
 	, _matView()
 	, _stopEventPolling(false)
-	, _toggleFullscreen(false)
 {}
 
 SDLWindow::~SDLWindow()
@@ -66,18 +66,6 @@ void SDLWindow::Close()
 }
 */
 
-void SDLWindow::ToggleFullscreen()
-{
-	int width = 1920, height=1080;
-	
-	SDL_SetWindowFullscreen(_pSdlWnd,SDL_WINDOW_FULLSCREEN);
-	//SDL_GetWindowSize(_pSdlWnd,&width,&height);
-	_width = width;
-	_height = height;
-	std::cout << "w: "<<_width<<std::endl<<"h: "<<_height << std::endl;
-	InitGL();
-	InitSimulation();
-}
 void SDLWindow::InitFullscreen(float axisLen, const std::string& caption)
 {
 	_fov = axisLen;
@@ -251,10 +239,6 @@ void SDLWindow::MainLoop()
 
 	while (_bRunning)
 	{
-		if (_toggleFullscreen) {
-		    this->ToggleFullscreen();
-		    _toggleFullscreen = false;
-		}
 		Update();
 		Render();
 

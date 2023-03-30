@@ -18,7 +18,6 @@ class SDLWindow
 public:
 	void Init(int width, int height, float axisLen, const std::string& caption);
 	void InitFullscreen(float axisLen, const std::string& caption);
-	void ToggleFullscreen();
 
 	void MainLoop();
 	void ExitMainLoop();
@@ -73,6 +72,5 @@ protected:
 	glm::mat4 _matView;
 
 	volatile bool _bRunning;
-	volatile bool _toggleFullscreen;
 	bool _stopEventPolling;
 };

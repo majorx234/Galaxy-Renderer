@@ -44,6 +44,7 @@ GalaxyWnd::~GalaxyWnd()
 	_vertStars.Release();
 }
 
+
 void GalaxyWnd::InitGL() noexcept(false)
 {
 	// GL initialization
@@ -573,9 +574,6 @@ void GalaxyWnd::OnProcessEvents(Uint32 type)
 		case SDLK_F10:
 				_bRunning = false;
 			break;
-//		case SDLK_F11:
-//				_toggleFullscreen = true;
-//			break;
 
 		case  SDLK_v:
 			_flags ^= (int)DisplayItem::VELOCITY;
