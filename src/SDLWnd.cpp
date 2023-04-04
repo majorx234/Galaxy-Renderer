@@ -15,6 +15,11 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Helper.hpp"
+#include "SDL_events.h"
+#include "SDL_mouse.h"
+#include "SDL_shape.h"
+#include "SDL_timer.h"
+#include "SDL_video.h"
 
 
 glm::vec2 SDLWindow::GetWindowPos(GLfloat x, GLfloat y, GLfloat z)
@@ -61,6 +66,59 @@ void SDLWindow::Close()
 }
 */
 
+void SDLWindow::InitFullscreen(float axisLen, const std::string& caption)
+{
+	_fov = axisLen;
+
+	SDL_Init(SDL_INIT_VIDEO);
+	atexit(SDL_Quit);
+
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
+
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+//	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+
+//	SDL_DisplayMode dm;
+//	SDL_GetDesktopDisplayMode(0,&dm);
+
+	
+	int width = 1920, height=1080;
+
+	_pSdlWnd = SDL_CreateWindow(
+		caption.c_str(),
+		SDL_WINDOWPOS_UNDEFINED,
+		SDL_WINDOWPOS_UNDEFINED,
+	//	dm.w,dm.h,
+		10,10,
+		SDL_WINDOW_OPENGL |
+		SDL_WINDOW_FULLSCREEN_DESKTOP);
+	SDL_GetWindowSize(_pSdlWnd,&_width,&_height);
+
+	if (!_pSdlWnd)
+		throw std::runtime_error(SDL_GetError());
+
+	_pSdlRenderer = SDL_CreateRenderer(_pSdlWnd, -1, SDL_RENDERER_ACCELERATED);
+	_sdcGlContext = SDL_GL_CreateContext(_pSdlWnd);
+
+	glewInit();
+
+	std::cout << "OpenGL Version Information:" << glGetString(GL_VERSION) << std::endl;
+	std::cout << "- OpenGL:     " << glGetString(GL_VERSION) << std::endl;
+	std::cout << "- GLSL:       " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+	std::cout << "- Vendor/GPU: " << glGetString(GL_VENDOR) << "/" << glGetString(GL_RENDERER) << std::endl;
+
+	std::cout << "w: "<<_width<<std::endl<<"h: "<<_height << std::endl;
+
+	InitGL();
+	InitSimulation();
+}
 void SDLWindow::Init(int width, int height, float axisLen, const std::string& caption)
 {
 	_fov = axisLen;

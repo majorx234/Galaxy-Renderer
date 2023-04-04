@@ -4,6 +4,8 @@ project(GalaxyRenderer)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include(GNUInstallDirs)
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
@@ -17,12 +19,12 @@ set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)
 
 set(LIB_SRC_FILES
-   CumulativeDistributionFunction.cpp 
-   Galaxy.cpp 
-   GalaxyWnd.cpp 
-   Helper.cpp  
-   SDLWnd.cpp 
-   TextBuffer.cpp
+ src/CumulativeDistributionFunction.cpp 
+ src/Galaxy.cpp 
+ src/GalaxyWnd.cpp 
+ src/Helper.cpp 
+ src/SDLWnd.cpp 
+ src/TextBuffer.cpp
 )
 
 set(GALAXY_RENDERER_HEADERS
@@ -39,7 +41,7 @@ set(GALAXY_RENDERER_HEADERS
 )
 
 set(EXE_SRC_FILES
-   main.cpp
+  src/main.cpp 
 )
 
 add_library(galaxy_renderer SHARED)

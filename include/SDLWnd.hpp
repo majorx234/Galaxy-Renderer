@@ -17,6 +17,7 @@ class SDLWindow
 {
 public:
 	void Init(int width, int height, float axisLen, const std::string& caption);
+	void InitFullscreen(float axisLen, const std::string& caption);
 
 	void MainLoop();
 	void ExitMainLoop();

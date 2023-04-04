@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include "Helper.hpp"
+#include "SDL_keycode.h"
 #include "Types.hpp"
 
 const float GalaxyWnd::TimeStepSize = 100000.0f;
@@ -43,6 +44,7 @@ GalaxyWnd::~GalaxyWnd()
 	_vertStars.Release();
 }
 
+
 void GalaxyWnd::InitGL() noexcept(false)
 {
 	// GL initialization
@@ -59,7 +61,7 @@ void GalaxyWnd::InitGL() noexcept(false)
 	_textGalaxyLabels.Initialize();
 
 	glDisable(GL_DEPTH_TEST);
-	glClearColor(0.0f, .0f, 0.08f, 0.0f);
+	glClearColor(0.0f, .0f, 0.00f, 0.0f);
 	SetCameraOrientation({ 0, 1, 0 });
 }
 
