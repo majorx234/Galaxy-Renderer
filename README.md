@@ -4,6 +4,7 @@
 
 # Fork of Spiral Galaxy Renderer
 - add cmake build 
+- added CLI with fullscreen-mode
 
 ## dependencies:
 - install sdl2, sdl2_ttf, glm, consolas-font
