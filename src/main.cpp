@@ -5,9 +5,11 @@
 
 /* TODO: delete inimplemented sign if finished <04-04-23, nikl> */
 std::string helpstr() {
-  return "default:	open in gtk window (CURRENTLY UNIMPLEMENTED!)\n"
-         "-f		open in Fullscreen mode\n"
-         "-l		open in legacy SDL-Window\n";
+  return "default:						open in qt-window "
+         "window (CURRENTLY UNIMPLEMENTED!)\n"
+         "-f								"
+         "	open in Fullscreen mode\n"
+         "-l [width] [height]	open in legacy SDL-Window\n";
 }
 
 std::string unknownCmd(const char *original_cmd) {
@@ -30,8 +32,13 @@ int main(int argc, char **argv) {
         } break;
         case 'l': {
           GalaxyWnd wndMain;
-          wndMain.Init(1600, 1000, 35000.0,
-                       "Rendering a Galaxy with Density Waves");
+          if (argv[2] && argv[3]) {
+            const char *width = argv[2], *height = argv[3];
+            wndMain.Init(atoi(width), atoi(height), 35000,
+                         "Rendering a Galaxy with Density Waves");
+          } else
+            wndMain.Init(1600, 1000, 35000.0,
+                         "Rendering a Galaxy with Density Waves");
           wndMain.MainLoop();
           break;
         }
