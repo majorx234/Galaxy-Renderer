@@ -1,96 +1,85 @@
 #pragma once
 
-#include <cstdint>
-#include <vector>
 #include <SDL2/SDL_ttf.h>
 
-#include "SDLWnd.hpp"
+#include <cstdint>
+#include <vector>
+
 #include "Galaxy.hpp"
+#include "SDLWnd.hpp"
+#include "TextBuffer.hpp"
 #include "VertexBufferBase.hpp"
 #include "VertexBufferLines.hpp"
 #include "VertexBufferStars.hpp"
-#include "TextBuffer.hpp"
-
 
 /** \brief Main window of th n-body simulation. */
-class GalaxyWnd final : public SDLWindow
-{
-public:
+class GalaxyWnd final : public SDLWindow {
+ public:
+  GalaxyWnd();
+  ~GalaxyWnd();
 
-	GalaxyWnd();
-	~GalaxyWnd();
+ protected:
+  virtual void Render() override;
+  virtual void Update() override;
 
-protected:
-	virtual void Render() override;
-	virtual void Update() override;
+  virtual void OnProcessEvents(Uint32 type) override;
 
-	virtual void OnProcessEvents(Uint32 type) override;
+  void InitGL() noexcept(false) override;
+  void InitSimulation() override;
 
-	void InitGL() noexcept (false) override;
-	void InitSimulation() override;
+ private:
+  enum class DisplayItem : uint32_t {
+    NONE = 0,
+    AXIS = 1 << 1,
+    STARS = 1 << 2,
+    PAUSE = 1 << 3,
+    HELP = 1 << 4,
+    DENSITY_WAVES = 1 << 5,
+    VELOCITY = 1 << 6,
+    DUST = 1 << 7,
+    H2 = 1 << 8,
+    FILAMENTS = 1 << 9,
+  };
 
-private:
+  enum RenderUpdateHint : uint32_t {
+    ruhNONE = 0,
+    ruhDENSITY_WAVES = 1 << 1,
+    ruhAXIS = 1 << 2,
+    ruhSTARS = 1 << 3,
+    ruhDUST = 1 << 4,
+    ruhCREATE_VELOCITY_CURVE = 1 << 5,
+    ruhCREATE_TEXT = 1 << 7
+  };
 
-	enum class DisplayItem : uint32_t
-	{
-		NONE          = 0,
-		AXIS          = 1 << 1,
-		STARS         = 1 << 2,
-		PAUSE         = 1 << 3,
-		HELP          = 1 << 4,
-		DENSITY_WAVES = 1 << 5,
-		VELOCITY      = 1 << 6,
-		DUST          = 1 << 7,
-		H2            = 1 << 8,
-		FILAMENTS     = 1 << 9,
-	};
+  float _time;
+  uint32_t _flags;  ///< The display flags
+  Galaxy _galaxy;
 
-	enum RenderUpdateHint : uint32_t
-	{
-		ruhNONE = 0,
-		ruhDENSITY_WAVES = 1 << 1,
-		ruhAXIS = 1 << 2,
-		ruhSTARS = 1 << 3,
-		ruhDUST = 1 << 4,
-		ruhCREATE_VELOCITY_CURVE = 1 << 5,
-		ruhCREATE_TEXT = 1 << 7
-	};
+  uint32_t _renderUpdateHint;
 
-	float _time;
-	uint32_t _flags;	///< The display flags
-	Galaxy _galaxy;
+  VertexBufferLines _vertDensityWaves;
+  VertexBufferLines _vertAxis;
+  VertexBufferLines _vertVelocityCurve;
+  VertexBufferStars _vertStars;
 
-	uint32_t _renderUpdateHint;
+  TextBuffer _textHelp;
+  TextBuffer _textAxisLabel;
+  TextBuffer _textGalaxyLabels;
 
-	VertexBufferLines _vertDensityWaves;
-	VertexBufferLines _vertAxis;
-	VertexBufferLines _vertVelocityCurve;
-	VertexBufferStars _vertStars;
+  std::vector<Galaxy::GalaxyParam> _predefinedGalaxies;
 
-	TextBuffer _textHelp;
-	TextBuffer _textAxisLabel;
-	TextBuffer _textGalaxyLabels;
+  static const float TimeStepSize;
 
-	std::vector<Galaxy::GalaxyParam> _predefinedGalaxies;
+  GalaxyWnd(const GalaxyWnd& orig);
 
-	static const float TimeStepSize;
+  void AddEllipsisVertices(std::vector<VertexColor>& vert,
+                           std::vector<int>& vertIdx, float a, float b,
+                           float angle, uint32_t pertNum, float pertAmp,
+                           Color col) const;
 
-	GalaxyWnd(const GalaxyWnd& orig);
-
-	void AddEllipsisVertices(
-		std::vector<VertexColor>& vert, 
-		std::vector<int>& vertIdx, 
-		float a,
-		float b,
-		float angle,
-		uint32_t pertNum, 
-		float pertAmp,
-		Color col) const;
-
-	void UpdateDensityWaves();
-	void UpdateAxis();
-	void UpdateStars();
-	void UpdateVelocityCurve();
-	void UpdateText();
+  void UpdateDensityWaves();
+  void UpdateAxis();
+  void UpdateStars();
+  void UpdateVelocityCurve();
+  void UpdateText();
 };
-

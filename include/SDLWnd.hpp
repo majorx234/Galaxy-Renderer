@@ -1,76 +1,75 @@
 #pragma once
 
-#include <string>
-
 #include <GL/glew.h>
-#include <glm/glm.hpp>
-
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_opengl.h> 
+#include <SDL2/SDL_opengl.h>
 #include <SDL2/SDL_ttf.h>
+
+#include <glm/glm.hpp>
+#include <string>
 
 #include "Types.hpp"
 
-
 /** \brief Basic infrastructure for grafical output using SDL/OpenGL */
-class SDLWindow
-{
-public:
-	void Init(int width, int height, float axisLen, const std::string& caption);
-	void InitFullscreen(float axisLen, const std::string& caption);
+class SDLWindow {
+ public:
+  void Init(int width, int height, float axisLen, const std::string& caption);
+  void InitFullscreen(float axisLen, const std::string& caption);
 
-	void MainLoop();
-	void ExitMainLoop();
+  void MainLoop();
+  void ExitMainLoop();
 
-	int GetWidth() const;
-	int GetHeight() const;
-	
-protected:
-	SDLWindow();
-	virtual ~SDLWindow();
+  int GetWidth() const;
+  int GetHeight() const;
 
-	virtual void Render() = 0;
-	virtual void Update() = 0;
+ protected:
+  SDLWindow();
+  virtual ~SDLWindow();
 
-	virtual void InitGL() noexcept (false) = 0;
-	virtual void InitSimulation() = 0;
+  virtual void Render() = 0;
+  virtual void Update() = 0;
 
-	virtual void PollEvents();
-	virtual void OnProcessEvents(Uint32 type);
+  virtual void InitGL() noexcept(false) = 0;
+  virtual void InitSimulation() = 0;
 
-	const glm::vec3& GetCamPos() const;
-	const glm::vec3& GetCamOrient() const;
-	const glm::vec3& GetCamLookAt() const;
+  virtual void PollEvents();
+  virtual void OnProcessEvents(Uint32 type);
 
-	void SetCameraOrientation(const glm::vec3& orientation);
-	void SetCamera(const glm::vec3& pos, const glm::vec3& lookAt, const glm::vec3& orient);
-	void AdjustCamera();
-	int GetFPS() const;
-	void ScaleAxis(float scale);
-	double GetFOV() const;
-	glm::vec2 GetWindowPos(GLfloat x, GLfloat y, GLfloat z);
+  const glm::vec3& GetCamPos() const;
+  const glm::vec3& GetCamOrient() const;
+  const glm::vec3& GetCamLookAt() const;
 
-	SDL_Event _event;
+  void SetCameraOrientation(const glm::vec3& orientation);
+  void SetCamera(const glm::vec3& pos, const glm::vec3& lookAt,
+                 const glm::vec3& orient);
+  void AdjustCamera();
+  int GetFPS() const;
+  void ScaleAxis(float scale);
+  double GetFOV() const;
+  glm::vec2 GetWindowPos(GLfloat x, GLfloat y, GLfloat z);
 
-	float _fov;			///< Length of an axis
-	
-	std::string _caption;
+  SDL_Event _event;
 
-	int _width;			///< Width of the window in pixel
-	int _height;		///< Height of the window in pixel
-	int _fps;
+  float _fov;  ///< Length of an axis
 
-	glm::vec3 _camPos;		///< Position of the camera
-	glm::vec3 _camLookAt;	///< Point atwhich the camera is aimed
-	glm::vec3 _camOrient;	///< orientation of the camera (rotation as it aims at its target)
+  std::string _caption;
 
-	SDL_Window *_pSdlWnd;
-	SDL_Renderer *_pSdlRenderer;
-	SDL_GLContext _sdcGlContext;
+  int _width;   ///< Width of the window in pixel
+  int _height;  ///< Height of the window in pixel
+  int _fps;
 
-	glm::mat4 _matProjection;
-	glm::mat4 _matView;
+  glm::vec3 _camPos;     ///< Position of the camera
+  glm::vec3 _camLookAt;  ///< Point atwhich the camera is aimed
+  glm::vec3 _camOrient;  ///< orientation of the camera (rotation as it aims at
+                         ///< its target)
 
-	volatile bool _bRunning;
-	bool _stopEventPolling;
+  SDL_Window* _pSdlWnd;
+  SDL_Renderer* _pSdlRenderer;
+  SDL_GLContext _sdcGlContext;
+
+  glm::mat4 _matProjection;
+  glm::mat4 _matView;
+
+  volatile bool _bRunning;
+  bool _stopEventPolling;
 };

@@ -20,30 +20,30 @@ int main(int argc, char **argv) {
     if (argv[1]) {
       const char *arg = argv[1];
       switch (arg[0]) {
-      case '-':
-        switch (arg[1]) {
-        case 'f': {
-          GalaxyWnd wndMain;
-          wndMain.InitFullscreen(35000.0,
-                                 "Rendering a Galaxy with Density Waves");
-          wndMain.MainLoop();
-        } break;
-        case 'l': {
-          GalaxyWnd wndMain;
-          wndMain.Init(1600, 1000, 35000.0,
-                       "Rendering a Galaxy with Density Waves");
-          wndMain.MainLoop();
-          break;
-        }
-        case 'h':
-          std::cout << helpstr() << std::endl;
+        case '-':
+          switch (arg[1]) {
+            case 'f': {
+              GalaxyWnd wndMain;
+              wndMain.InitFullscreen(35000.0,
+                                     "Rendering a Galaxy with Density Waves");
+              wndMain.MainLoop();
+            } break;
+            case 'l': {
+              GalaxyWnd wndMain;
+              wndMain.Init(1600, 1000, 35000.0,
+                           "Rendering a Galaxy with Density Waves");
+              wndMain.MainLoop();
+              break;
+            }
+            case 'h':
+              std::cout << helpstr() << std::endl;
+              break;
+            default:
+              std::cout << unknownCmd(arg) << std::endl;
+          }
           break;
         default:
-          std::cout << unknownCmd(arg) << std::endl;
-        }
-        break;
-      default:
-        std::cout << helpstr() << std::endl;
+          std::cout << helpstr() << std::endl;
       }
     } else
       std::cout << helpstr() << std::endl;
