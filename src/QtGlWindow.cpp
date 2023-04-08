@@ -1,8 +1,9 @@
+#include "QtGlWidget.hpp"
 #include <QtWidgets>
 #include "QtGlWindow.hpp"
 #include "ui_qtglwindow.h"
 
-#include "QtGlWidget.hpp"
+
 
 QtGlWindow::QtGlWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::QtGlWindow) {
   ui->setupUi(this);  
