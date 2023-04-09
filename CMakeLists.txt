@@ -4,7 +4,6 @@ project(GalaxyRenderer)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include(GNUInstallDirs)
 
@@ -22,14 +21,14 @@ QT5_WRAP_UI(QT_GL_WINDOW_UISrcs
 )
 
 set(QT_GL_WIDGET_SRC
-	src/QtGlWidget.cpp
-	include/QtGlWidget.hpp
-	)
+  src/QtGlWidget.cpp
+  include/QtGlWidget.hpp
+)
 
 set(QT_GL_WINDOW_SRC
-	src/QtGlWindow.cpp
-	include/QtGlWindow.hpp
-	)
+  src/QtGlWindow.cpp
+  include/QtGlWindow.hpp
+)
 
 set(QT_MAIN_SRC
   src/main_qt.cpp 
@@ -94,37 +93,37 @@ target_link_libraries(qt_gl_window PRIVATE
   Qt5::Widgets
 )
 
-add_library(galaxy_renderer SHARED)
-target_sources(galaxy_renderer PRIVATE
-    ${LIB_SRC_FILES}
-    ${GALAXY_RENDERER_HEADERS}
-)
-target_include_directories(galaxy_renderer PRIVATE
-    include
-)
-target_include_directories(galaxy_renderer PUBLIC 
-  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>/galaxy_renderer)
-target_include_directories(galaxy_renderer SYSTEM
-  PUBLIC ${SDL2_INCLUDE_DIR}
-)
-target_link_libraries(galaxy_renderer
-    ${SDL2_LIBRARY} 
-    GLEW::GLEW 
-    ${OPENGL_LIBRARIES} 
-    ${SDL2_TTF_LIBRARY}
-)
-set_target_properties(galaxy_renderer PROPERTIES PUBLIC_HEADER "${GALAXY_RENDERER_HEADERS}")
+#add_library(galaxy_renderer SHARED)
+#target_sources(galaxy_renderer PRIVATE
+#    ${LIB_SRC_FILES}
+#    ${GALAXY_RENDERER_HEADERS}
+#)
+#target_include_directories(galaxy_renderer PRIVATE
+#    include
+#)
+#target_include_directories(galaxy_renderer PUBLIC
+#  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>/galaxy_renderer)
+#target_include_directories(galaxy_renderer SYSTEM
+#  PUBLIC ${SDL2_INCLUDE_DIR}
+#)
+#target_link_libraries(galaxy_renderer
+#    ${SDL2_LIBRARY}
+#    GLEW::GLEW
+#    ${OPENGL_LIBRARIES}
+#    ${SDL2_TTF_LIBRARY}
+#)
+#set_target_properties(galaxy_renderer PROPERTIES PUBLIC_HEADER "${GALAXY_RENDERER_HEADERS}")
 
-add_executable(galaxy_renderer_gui)
-target_sources(galaxy_renderer_gui PRIVATE
-    ${EXE_SRC_FILES}
-)
-target_include_directories(galaxy_renderer_gui PRIVATE
-    include
-)
-target_link_libraries(galaxy_renderer_gui
-    galaxy_renderer
-)
+#add_executable(galaxy_renderer_gui)
+#target_sources(galaxy_renderer_gui PRIVATE
+#    ${EXE_SRC_FILES}
+#)
+#target_include_directories(galaxy_renderer_gui PRIVATE
+#    include
+#)
+#target_link_libraries(galaxy_renderer_gui
+#    galaxy_renderer
+#)
 
 add_executable(qt_galaxy_renderer_gui)
 target_sources(qt_galaxy_renderer_gui PRIVATE
@@ -142,21 +141,22 @@ target_link_libraries(qt_galaxy_renderer_gui
 
 
 install(TARGETS 
-  galaxy_renderer
-    galaxy_renderer_gui
-    EXPORT galaxy_rendererConfig
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    PUBLIC_HEADER DESTINATION include/galaxy_renderer
+#  galaxy_renderer
+#  galaxy_renderer_gui
+  qt_galaxy_renderer_gui
+  EXPORT galaxy_rendererConfig
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+  PUBLIC_HEADER DESTINATION include/galaxy_renderer
 )
 
-export(TARGETS galaxy_renderer
-    NAMESPACE galaxy_renderer::
-    FILE "${CMAKE_CURRENT_BINARY_DIR}/galaxy_rendererConfig.cmake"
-)
+#export(TARGETS galaxy_renderer
+#    NAMESPACE galaxy_renderer::
+#    FILE "${CMAKE_CURRENT_BINARY_DIR}/galaxy_rendererConfig.cmake"
+#)
 
-install(EXPORT galaxy_rendererConfig
-    DESTINATION "${CMAKE_INSTALL_DATADIR}/galaxy_renderer/cmake"
-    NAMESPACE galaxy_renderer::
-)
+#install(EXPORT galaxy_rendererConfig
+#    DESTINATION "${CMAKE_INSTALL_DATADIR}/galaxy_renderer/cmake"
+#    NAMESPACE galaxy_renderer::
+#)
