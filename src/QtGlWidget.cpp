@@ -1,8 +1,22 @@
 #include "QtGlWidget.hpp"
 
-QtGlWidget::QtGlWidget(QWidget *parent) : QGLWidget(parent) {
-  _width = 0;
-  _height = 0;  
+QtGlWidget::QtGlWidget(QWidget *parent) : QGLWidget(parent)
+  : _event()
+  _fov(0),
+  _width(0),
+  _height(0),
+  _caption(),
+  _fps(0),
+  _camPos({ 0, 0, 2 }),
+  _camLookAt({ 0, 0, 0 }),
+  _camOrient({ 0, 1, 0 }),
+  _matProjection(),
+  _matView(),
+  _running(true) {
+}
+
+QtGlWidget::~QtGlWidget() {
+
 }
 
 void QtGlWidget::_tick() {
@@ -13,8 +27,13 @@ void QtGlWidget::_tick() {
   //QTimer::singleShot(1000/_fps, this, SLOT(_tick()));
 }
 
-QtGlWidget::~QtGlWidget() {
-  
+glm::vec2 QtGlWidget::GetWindowPos(GLfloat x, GLfloat y, GLfloat z)
+{
+  glm::vec3 pos = glm::vec3(x, y, z);
+  glm::mat4 matModel = glm::mat4(1.0);
+  glm::vec4 viewPort = glm::vec4(0.0f, 0.0f, (float)_width, (float)_height);
+  glm::vec3 projected = glm::project(pos, matModel, _matProjection, viewPort);
+  return glm::vec2(projected.x, projected.y);
 }
 
 void QtGlWidget::initializeGL() {}
@@ -26,7 +45,18 @@ void QtGlWidget::resizeGL(int w, int h) {}
 void QtGlWidget::setShaders(std::string shader_path) {}
 
 void QtGlWidget::init(int width, int height, float axisLen, const std::string &caption) {
+  this._fov = axisLen;
+  this._width = width;
+  this._height = height;
 
+  glewInit();
+  std::cout << "OpenGL Version Information:" << glGetString(GL_VERSION) << std::endl;
+  std::cout << "- OpenGL:     " << glGetString(GL_VERSION) << std::endl;
+  std::cout << "- GLSL:       " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+  std::cout << "- Vendor/GPU: " << glGetString(GL_VENDOR) << "/" << glGetString(GL_RENDERER) << std::endl;
+
+  InitGL();
+  InitSimulation();
 }
 
 int QtGlWidget::getWidth() {
@@ -67,7 +97,10 @@ int QtGlWidget::GetFPS() {
   return this._fps;
 }
 
-void QtGlWidget::ScaleAxis(float scale) {}
+void QtGlWidget::ScaleAxis(float scale) {
+  this._fov *= scale;
+  AdjustCamera();
+}
 
 double QtGlWidget::GetFOV() {
   return 0.0;

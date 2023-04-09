@@ -63,7 +63,7 @@ protected:
   glm::mat4 _matProjection;
   glm::mat4 _matView;
 
-  std::atomic_bool running;
+  std::atomic_bool _running;
 };
 
 #endif // QT_GL_WIDGET_HPP
