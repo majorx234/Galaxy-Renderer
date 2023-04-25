@@ -1,0 +1,74 @@
+[
+{
+  "directory": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build",
+  "command": "/sbin/c++  -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/../include  -o CMakeFiles/galaxy_lib.dir/home/nikl/Git/Galaxy-Renderer/src/Galaxy.cpp.o -c /home/nikl/Git/Galaxy-Renderer/src/Galaxy.cpp",
+  "file": "/home/nikl/Git/Galaxy-Renderer/src/Galaxy.cpp",
+  "output": "CMakeFiles/galaxy_lib.dir/home/nikl/Git/Galaxy-Renderer/src/Galaxy.cpp.o"
+},
+{
+  "directory": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build",
+  "command": "/sbin/c++  -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/../include  -o CMakeFiles/galaxy_lib.dir/home/nikl/Git/Galaxy-Renderer/src/CumulativeDistributionFunction.cpp.o -c /home/nikl/Git/Galaxy-Renderer/src/CumulativeDistributionFunction.cpp",
+  "file": "/home/nikl/Git/Galaxy-Renderer/src/CumulativeDistributionFunction.cpp",
+  "output": "CMakeFiles/galaxy_lib.dir/home/nikl/Git/Galaxy-Renderer/src/CumulativeDistributionFunction.cpp.o"
+},
+{
+  "directory": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build",
+  "command": "/sbin/c++  -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/../include  -o CMakeFiles/galaxy_lib.dir/home/nikl/Git/Galaxy-Renderer/src/TextBuffer.cpp.o -c /home/nikl/Git/Galaxy-Renderer/src/TextBuffer.cpp",
+  "file": "/home/nikl/Git/Galaxy-Renderer/src/TextBuffer.cpp",
+  "output": "CMakeFiles/galaxy_lib.dir/home/nikl/Git/Galaxy-Renderer/src/TextBuffer.cpp.o"
+},
+{
+  "directory": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build",
+  "command": "/sbin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -Dopengl_widget_EXPORTS -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -fPIC -fPIC -o CMakeFiles/opengl_widget.dir/src/opengl_widget.cpp.o -c /home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/src/opengl_widget.cpp",
+  "file": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/src/opengl_widget.cpp",
+  "output": "CMakeFiles/opengl_widget.dir/src/opengl_widget.cpp.o"
+},
+{
+  "directory": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build",
+  "command": "/sbin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -Dopengl_widget_EXPORTS -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -fPIC -fPIC -o CMakeFiles/opengl_widget.dir/src/moc_opengl_widget.cpp.o -c /home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/src/moc_opengl_widget.cpp",
+  "file": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/src/moc_opengl_widget.cpp",
+  "output": "CMakeFiles/opengl_widget.dir/src/moc_opengl_widget.cpp.o"
+},
+{
+  "directory": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build",
+  "command": "/sbin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -Dopengl_widget_EXPORTS -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -fPIC -fPIC -o CMakeFiles/opengl_widget.dir/include/moc_opengl_widget.cpp.o -c /home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/include/moc_opengl_widget.cpp",
+  "file": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/include/moc_opengl_widget.cpp",
+  "output": "CMakeFiles/opengl_widget.dir/include/moc_opengl_widget.cpp.o"
+},
+{
+  "directory": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build",
+  "command": "/sbin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/include -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/../include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -fPIC -o CMakeFiles/opengl_window.dir/src/opengl_window.cpp.o -c /home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/src/opengl_window.cpp",
+  "file": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/src/opengl_window.cpp",
+  "output": "CMakeFiles/opengl_window.dir/src/opengl_window.cpp.o"
+},
+{
+  "directory": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build",
+  "command": "/sbin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/include -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/../include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -fPIC -o CMakeFiles/opengl_window.dir/src/moc_opengl_window.cpp.o -c /home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/src/moc_opengl_window.cpp",
+  "file": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/src/moc_opengl_window.cpp",
+  "output": "CMakeFiles/opengl_window.dir/src/moc_opengl_window.cpp.o"
+},
+{
+  "directory": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build",
+  "command": "/sbin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/include -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/../include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -fPIC -o CMakeFiles/opengl_window.dir/include/moc_opengl_window.cpp.o -c /home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/include/moc_opengl_window.cpp",
+  "file": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/include/moc_opengl_window.cpp",
+  "output": "CMakeFiles/opengl_window.dir/include/moc_opengl_window.cpp.o"
+},
+{
+  "directory": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build",
+  "command": "/sbin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/include -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/../include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -fPIC -o CMakeFiles/opengl_window.dir/qrc_resources.cpp.o -c /home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/qrc_resources.cpp",
+  "file": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/qrc_resources.cpp",
+  "output": "CMakeFiles/opengl_window.dir/qrc_resources.cpp.o"
+},
+{
+  "directory": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build",
+  "command": "/sbin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -fPIC -o CMakeFiles/qtopengl_widget_test.dir/src/main_opengl_widget_test.cpp.o -c /home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/src/main_opengl_widget_test.cpp",
+  "file": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/src/main_opengl_widget_test.cpp",
+  "output": "CMakeFiles/qtopengl_widget_test.dir/src/main_opengl_widget_test.cpp.o"
+},
+{
+  "directory": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build",
+  "command": "/sbin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/include -I/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/../include -isystem /usr/include/qt -isystem /usr/include/qt/QtCore -isystem /usr/lib/qt/mkspecs/linux-g++ -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -fPIC -o CMakeFiles/qtopengl_window_test.dir/src/main_opengl_window_test.cpp.o -c /home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/src/main_opengl_window_test.cpp",
+  "file": "/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/src/main_opengl_window_test.cpp",
+  "output": "CMakeFiles/qtopengl_window_test.dir/src/main_opengl_window_test.cpp.o"
+}
+]

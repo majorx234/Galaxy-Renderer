@@ -1,0 +1,6 @@
+# Hashes of file build rules.
+210ba3672bf0f723cd8c2dc0af3f5042 include/moc_opengl_widget.cpp
+d1e8b16675797d93e7968fe6ab19e92f include/moc_opengl_window.cpp
+a980946423b9ad953fb8ca8d360dc948 qrc_resources.cpp
+3b75b09a2a832453d598a8d99d55631c src/moc_opengl_widget.cpp
+59b70f5d7239944d00efffdcb4c5566d src/moc_opengl_window.cpp

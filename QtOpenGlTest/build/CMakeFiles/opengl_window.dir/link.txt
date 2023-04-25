@@ -1,0 +1,2 @@
+/sbin/ar qc libopengl_window.a CMakeFiles/opengl_window.dir/src/opengl_window.cpp.o CMakeFiles/opengl_window.dir/src/moc_opengl_window.cpp.o CMakeFiles/opengl_window.dir/include/moc_opengl_window.cpp.o CMakeFiles/opengl_window.dir/qrc_resources.cpp.o
+/sbin/ranlib libopengl_window.a
