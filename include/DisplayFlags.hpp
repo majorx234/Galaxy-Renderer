@@ -44,7 +44,7 @@ class DisplayFlag {
   void setDisplayStarFlag(bool flag);
   void setDisplayPauseFlag(bool flag);
   void setDisplayHelpFlag(bool flag);
-  void setDisplayDesityWavesFlag(bool flag);
+  void setDisplayDensityWavesFlag(bool flag);
   void setDisplayVelocityFlag(bool flag);
   void setDisplayDustFlag(bool flag);
   void setDisplayH2Flag(bool flag);
@@ -64,27 +64,21 @@ class DisplayFlag {
 
   // RenderUpdate Flag Setter and Getter
 
-  void setRenderNoneFlag();
-  void setRenderAxisFlag();
-  void setRenderStarFlag();
-  void setRenderPauseFlag();
-  void setRenderHelpFlag();
-  void setRenderDesityWavesFlag();
-  void setRenderVelocityFlag();
-  void setRenderDustFlag();
-  void setRenderH2Flag();
-  void setRenderFilamentsFlag();
+  void setRenderNoneFlag(bool flag);
+  void setRenderAxisFlag(bool flag);
+  void setRenderStarFlag(bool flag);
+  void setRenderDesityWavesFlag(bool flag);
+  void setRenderVelocityFlag(bool flag);
+  void setRenderDustFlag(bool flag);
+  void setRenderTextFlag(bool flag);
 
   bool getRenderNoneFlag();
   bool getRenderAxisFlag();
   bool getRenderStarFlag();
-  bool getRenderPauseFlag();
-  bool getRenderHelpFlag();
   bool getRenderDesityWavesFlag();
   bool getRenderVelocityFlag();
   bool getRenderDustFlag();
-  bool getRenderH2Flag();
-  bool getRenderFilamentsFlag();
+  bool getRenderTextFlag();
   virtual ~DisplayFlag();
 };
 #endif /* DISPLAY_FLAG_H*/

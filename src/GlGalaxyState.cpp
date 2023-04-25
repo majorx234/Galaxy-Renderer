@@ -11,9 +11,6 @@ GlGalaxyState::GlGalaxyState(std::function<glm::vec2(GLfloat, GLfloat, GLfloat)>
       _vertAxis(),
       _vertVelocityCurve(1, GL_DYNAMIC_DRAW),
       _vertStars(GL_FUNC_ADD, GL_ONE),
-      _textHelp(),
-      _textAxisLabel(),
-      _textGalaxyLabels(),
       _GetWindowPos(windowPosFunc)
  {
   _predefinedGalaxies.push_back(
