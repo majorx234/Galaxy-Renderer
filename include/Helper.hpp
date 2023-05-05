@@ -19,21 +19,21 @@
 class Helper {
  public:
   /** \brief Convert parsec to kilometre. */
-  static const float PC_TO_KM;
+  constexpr static const float PC_TO_KM = 3.08567758129e13f;
 
   /** \brief Seconds per year. */
-  static const float SEC_PER_YEAR;
+  constexpr static const float SEC_PER_YEAR = 365.25f * 86400;
 
   /** \brief Deg to radian conversion faktor. */
-  static const float DEG_TO_RAD;
+  constexpr static const float DEG_TO_RAD = (float)M_PI / 180.0f;
 
   /** \brief Radian to deg conversion faktor. */
-  static const float RAD_TO_DEG;
+  constexpr static const float RAD_TO_DEG = 180.0f / (float)M_PI;
 
   /** \brief Constant of gravity. */
-  static const float CONTANT_OF_GRAVITY;
+  constexpr static const float CONTANT_OF_GRAVITY = 6.672e-11f;
 
-  static const float PI;
+  constexpr static const float PI = (float)M_PI;
 
   static inline unsigned int PowerTwoFloor(unsigned int val) {
     unsigned int power = 2, nextVal = power * 2;
@@ -45,7 +45,7 @@ class Helper {
     return power << 1;  // power * 2;
   }
 
-  static inline float rnum() { return (float)std::rand() / RAND_MAX; }
+  static inline float rnum() { return (float)std::rand() / RAND_MAX; };
 
   static void CheckGlError(const char* szMsg) {
     auto errc = glGetError();
