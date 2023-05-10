@@ -23,14 +23,16 @@ void printShaderInfoLog(GLuint obj);
 void printProgramInfoLog(GLuint obj);
 
 // Helper function for
-glm::vec2 getWindwPos(GLfloat x, GLfloat y, GLfloat z, glm::mat4 matProjection,
-                      int height, int width) {
-  glm::vec3 pos = glm::vec3(x, y, z);
-  glm::mat4 matModel = glm::mat4(1.0);
-  glm::vec4 viewPort = glm::vec4(0.0f, 0.0f, (float)width, (float)height);
-  glm::vec3 projected = glm::project(pos, matModel, matProjection, viewPort);
-  return glm::vec2(projected.x, projected.y);
-}
+/* glm::vec2 getWindwPos(GLfloat x, GLfloat y, GLfloat z, glm::mat4
+ * matProjection, */
+/*                       int height, int width) { */
+/*   glm::vec3 pos = glm::vec3(x, y, z); */
+/*   glm::mat4 matModel = glm::mat4(1.0); */
+/*   glm::vec4 viewPort = glm::vec4(0.0f, 0.0f, (float)width, (float)height); */
+/*   glm::vec3 projected = glm::project(pos, matModel, matProjection, viewPort);
+ */
+/*   return glm::vec2(projected.x, projected.y); */
+/* } */
 
 void OpenGlWindow::adjustCamera() {
   double l = _fov / 2.0;
@@ -57,8 +59,10 @@ OpenGlWindow::OpenGlWindow(QWindow *parent)
       _galaxy(),
       _vertDensityWaves(2),
       _vertVelocityCurve(1, GL_DYNAMIC_DRAW),
-      _vertStars(GL_FUNC_ADD, GL_ONE) {
+      _vertStars(GL_FUNC_ADD, GL_ONE),
+      cycleTimer(this) {
   setSurfaceType(QWindow::OpenGLSurface);
+  connect(&cycleTimer, &QTimer::timeout, this, &OpenGlWindow::renderNow);
 }
 
 OpenGlWindow::~OpenGlWindow() {
@@ -66,80 +70,27 @@ OpenGlWindow::~OpenGlWindow() {
   /**/
   /* // since we release resources related to an OpenGL context, */
   /* // we make this context current before cleaning up our resources */
-  m_context->makeCurrent(this);
   /**/
   /* m_vao.destroy(); */
   /* m_vertexBufferObject.destroy(); */
   /* delete m_program; */
-  _vertStars.Release();
-  _vertDensityWaves.Release();
-  _vertVelocityCurve.Release();
+  this->releaseVertBuffer();
 }
 
+void OpenGlWindow::releaseVertBuffer() {
+  m_context->makeCurrent(this);
+  _vertStars.Release();
+  /* _vertDensityWaves.Release(); */
+  /* _vertVelocityCurve.Release(); */
+}
+
+
 void OpenGlWindow::initialize() {
-  // shader part
-  /* m_program = new QOpenGLShaderProgram(); */
-  /* // shaderProgram = glCreateProgram(); */
-  /* if (!m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, */
-  /*                                         ":/src/shader/pass_through.vert"))
-   * { */
-  /*   qDebug() << "Vertex shader errors :\n" << m_program->log(); */
-  /* } */
-  /**/
-  /* if (!m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, */
-  /*                                         ":/src/shader/uniform_color.frag"))
-   * { */
-  /*   qDebug() << "Fragment shader errors :\n" << m_program->log(); */
-  /* } */
-  /**/
-  /* if (!m_program->link()) */
-  /*   qDebug() << "Shader linker errors :\n" << m_program->log(); */
-  /**/
-  /* float vertices[] = {-0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f, 0.0f, 0.5f,
-   * 0.0f}; */
-  /**/
-  /* // create a new buffer for the vertices */
-  /* m_vertexBufferObject = QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);  // VBO
-   */
-  /* m_vertexBufferObject.create();  // create underlying OpenGL object */
-  /* m_vertexBufferObject.setUsagePattern( */
-  /*     QOpenGLBuffer::StaticDraw);  // must be called before allocate */
-  /**/
-  /* m_vertexBufferObject */
-  /*     .bind();  // set it active in the context, so that we can write to it
-   */
-  /* // int bufSize = sizeof(vertices) = 9 * sizeof(float) = 9*4 = 36 bytes */
-  /* m_vertexBufferObject.allocate(vertices, */
-  /*                               sizeof(vertices));  // copy data into buffer
-   */
-  /**/
-  /* // Initialize the Vertex Array Object (VAO) to record and remember
-   * subsequent */
-  /* // attribute assocations with generated vertex buffer(s) */
-  /* m_vao.create();  // create underlying OpenGL object */
-  /* m_vao.bind();    // sets the Vertex Array Object current to the OpenGL
-   * context */
-  /*                  // so it monitors attribute assignments */
-  /* // now all following enableAttributeArray(), disableAttributeArray() and */
-  /* // setAttributeBuffer() calls are "recorded" in the currently bound VBA. */
-  /**/
-  /* // Enable attribute array at layout location 0 */
-  /* m_program->enableAttributeArray(0); */
-  /* m_program->setAttributeBuffer(0, GL_FLOAT, 0, 3); */
-  /* // This maps the data we have set in the VBO to the "position" attribute.
-   */
-  /* // 0 - offset - means the "position" data starts at the begin of the memory
-   */
-  /* // array 3 - size of each vertex (=vec3) - means that each position-tuple
-   * has */
-  /* // the size of 3 floats (those are the 3 coordinates, */
-  /* //     mind: this is the size of GL_FLOAT, not the size in bytes! */
-  /**/
-  /* // Release (unbind) all */
-  /* m_vertexBufferObject.release(); */
-  /* m_vao.release();  // not really necessary, but done for completeness */
-  glewInit();
-  glViewport(0, 0, width(), height());
+  GLenum err = glewInit();
+  if (GLEW_OK != err) {
+    /* Problem: glewInit failed, something is seriously wrong. */
+    fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+  }
 
   _galaxy.Reset(
       {13000,    // radius of the galaxy
@@ -158,39 +109,19 @@ void OpenGlWindow::initialize() {
   _vertVelocityCurve.Initialize();
 
   glDisable(GL_DEPTH_TEST);
-  glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
   this->_camOrient = {0, 1, 0};
   adjustCamera();
+  cycleTimer.start(20);
 }
 
 void OpenGlWindow::render() {
-  /* // this function is called for every frame to be rendered on screen */
-  /* const qreal retinaScale = */
-  /*     devicePixelRatio();  // needed for Macs with retina display */
-  /* glViewport(0, 0, width() * retinaScale, height() * retinaScale); */
-  /**/
-  /* // set the background color = clear color */
-  /* glClearColor(0.1f, 0.1f, 0.2f, 1.0f); */
-  /* glClear(GL_COLOR_BUFFER_BIT); */
-  /**/
-  /* // use our shader program */
-  /* m_program->bind(); */
-  /* // bind the vertex array object, which in turn binds the vertex buffer
-   * object */
-  /* // and sets the attribute buffer in the OpenGL context */
-  /* m_vao.bind(); */
-  /* // now draw the triangles: */
-  /* // - GL_TRIANGLES - draw individual triangles */
-  /* // - 0 index of first triangle to draw */
-  /* // - 3 number of vertices to process */
-  /* glDrawArrays(GL_TRIANGLES, 0, 3); */
-  /* // finally release VAO again (not really necessary, just for completeness)
-   */
- _time += TimeStepSize;
- /* m_vao.release(); */
+  _time += TimeStepSize;
+  /* m_vao.release(); */
+  glViewport(0, 0, width(), height());
   UpdateStars();
-  UpdateDensityWaves();
-  UpdateVelocityCurve();
+  /* UpdateDensityWaves(); */
+  /* UpdateVelocityCurve(); */
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   adjustCamera();
@@ -207,8 +138,8 @@ void OpenGlWindow::render() {
                                    _galaxy.GetPertAmp(),
                                    (int)_galaxy.GetDustRenderSize(), features);
   _vertStars.Draw(_matView, _matProjection);
-  _vertDensityWaves.Draw(_matView, _matProjection);
-  _vertVelocityCurve.Draw(_matView, _matProjection);
+  /* _vertDensityWaves.Draw(_matView, _matProjection); */
+  /* _vertVelocityCurve.Draw(_matView, _matProjection); */
 }
 
 void OpenGlWindow::renderNow() {
@@ -247,7 +178,13 @@ void OpenGlWindow::exposeEvent(QExposeEvent * /*event*/) {
   renderNow();  // simply redirect call to renderNow()
 }
 
+//
+//
+//
 // from GalaxyWnd
+//
+//
+//
 
 void OpenGlWindow::UpdateVelocityCurve() {
   // I don't need every star for the curve.

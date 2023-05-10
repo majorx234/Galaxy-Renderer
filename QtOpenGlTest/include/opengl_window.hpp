@@ -2,8 +2,10 @@
 #define OPENGL_WINDOW_HPP_
 #include "Galaxy.hpp"
 #include "VertexBufferLines.hpp"
+#include "VertexBufferStars.hpp"
 #include <qevent.h>
 #include <qopenglcontext.h>
+#include <qtimer.h>
 
 #include <QOpenGLBuffer>
 #include <QOpenGLFunctions>
@@ -28,6 +30,9 @@ class OpenGlWindow : public QWindow, protected QOpenGLFunctions {
 
  protected:
  private:
+  // test object for updating
+  QTimer cycleTimer;
+
   bool event(QEvent* event) override;
   void exposeEvent(QExposeEvent* event) override;
   void UpdateStars();
@@ -45,6 +50,8 @@ class OpenGlWindow : public QWindow, protected QOpenGLFunctions {
   bool needsInitialize;
 
   const float TimeStepSize = 100000.0f;
+
+  void releaseVertBuffer();
 
   // Galaxy renderer specific stuff
   Galaxy _galaxy;
