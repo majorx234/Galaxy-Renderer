@@ -1,7 +1,0 @@
-/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/CMakeFiles/galaxy_lib.dir
-/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/CMakeFiles/opengl_widget.dir
-/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/CMakeFiles/opengl_window.dir
-/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/CMakeFiles/qtopengl_widget_test.dir
-/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/CMakeFiles/qtopengl_window_test.dir
-/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/CMakeFiles/edit_cache.dir
-/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build/CMakeFiles/rebuild_cache.dir

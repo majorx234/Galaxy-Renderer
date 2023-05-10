@@ -1,1 +1,0 @@
-/sbin/c++ CMakeFiles/qtopengl_widget_test.dir/src/main_opengl_widget_test.cpp.o -o qtopengl_widget_test  -Wl,-rpath,/home/nikl/Git/Galaxy-Renderer/QtOpenGlTest/build libopengl_widget.so /usr/lib/libQt5Widgets.so.5.15.9 /usr/lib/libQt5Gui.so.5.15.9 /usr/lib/libQt5Core.so.5.15.9 /usr/lib/libOpenGL.so /usr/lib/libGLX.so /usr/lib/libGLU.so /usr/lib/libGLEW.so 

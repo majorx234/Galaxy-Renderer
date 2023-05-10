@@ -1,2 +1,0 @@
-/sbin/ar qc libgalaxy_lib.a "CMakeFiles/galaxy_lib.dir/home/nikl/Git/Galaxy-Renderer/src/Galaxy.cpp.o" "CMakeFiles/galaxy_lib.dir/home/nikl/Git/Galaxy-Renderer/src/CumulativeDistributionFunction.cpp.o" "CMakeFiles/galaxy_lib.dir/home/nikl/Git/Galaxy-Renderer/src/TextBuffer.cpp.o"
-/sbin/ranlib libgalaxy_lib.a

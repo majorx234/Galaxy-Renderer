@@ -1,1 +1,0 @@
-/sbin/c++ CMakeFiles/qtopengl_window_test.dir/src/main_opengl_window_test.cpp.o -o qtopengl_window_test  libopengl_window.a /usr/lib/libQt5Widgets.so.5.15.9 /usr/lib/libQt5Gui.so.5.15.9 /usr/lib/libQt5Core.so.5.15.9 /usr/lib/libOpenGL.so /usr/lib/libGLX.so /usr/lib/libGLU.so /usr/lib/libGLEW.so libgalaxy_lib.a 
