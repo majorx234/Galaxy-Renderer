@@ -1,162 +1,93 @@
 cmake_minimum_required(VERSION 3.8)
-project(GalaxyRenderer)
+PROJECT(QtTestGalaxy)
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-include(GNUInstallDirs)
-
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
-
-#set(OPENGL_glx_LIBRARY)
 set(OpenGL_GL_PREFERENCE GLVND)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 find_package(Qt5 COMPONENTS Core Widgets OpenGL REQUIRED)
 find_package( GLUT REQUIRED)
 find_package( GLEW   REQUIRED )
 find_package( OpenGL REQUIRED)
+#set(CMAKE_AUTORCC ON)
 
-QT5_WRAP_UI(QT_GL_WINDOW_UISrcs
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/qtglwindow.ui
+qt5_add_resources (RCC_SOURCES ${RESOURCES})
+
+# 1st approach OpenGL window
+set(OPENGL_WINDOW_SOURCES
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/opengl_window.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/opengl_window.hpp
 )
 
-set(QT_GL_WIDGET_SRC
-  src/QtGlWidget.cpp
-  include/QtGlWidget.hpp
+QT5_WRAP_CPP( OPENGL_WINDOW_MOC_SOURCES
+  ${OPENGL_WINDOW_SOURCES}
 )
 
-set(QT_GL_WINDOW_SRC
-  src/QtGlWindow.cpp
-  include/QtGlWindow.hpp
+set(MAIN_OPENGL_WINDOW_TEST_SOURCES
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/main_opengl_window_test.cpp
 )
 
-set(QT_MAIN_SRC
-  src/main_qt.cpp 
-)
-
-QT5_WRAP_CPP(QT_GL_WINDOW_MOCrcs
-  ${QT_GL_WINDOW_SRC}
-)
-
-QT5_WRAP_CPP(QT_GL_WIDGET_MOCrcs
-  ${QT_GL_WIDGET_SRC}
-)
-
-QT5_WRAP_CPP(QT_MAIN_MOCrcs
-  ${QT_MAIN_SRC}
-)
-
-set(LIB_SRC_FILES
- src/CumulativeDistributionFunction.cpp 
- src/Galaxy.cpp 
-# src/GalaxyWnd.cpp 
- src/Helper.cpp 
- src/TextBuffer.cpp
+QT5_WRAP_CPP(MAIN_WINDOW_MOCsrcs
+  {MAIN_OPENGL_WINDOW_TEST_SOURCES}
 )
 
 set(GALAXY_RENDERER_HEADERS
-   include/CumulativeDistributionFunction.hpp 
-   include/Galaxy.hpp 
-   include/GalaxyWnd.hpp 
-   include/Helper.hpp  
-#   include/SDLWnd.hpp 
-   include/TextBuffer.hpp
-   include/Types.hpp
-   include/VertexBufferBase.hpp
-   include/VertexBufferLines.hpp
-   include/VertexBufferStars.hpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy_gl_lib/CumulativeDistributionFunction.hpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy_gl_lib/Galaxy.hpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy_gl_lib/Helper.hpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy_gl_lib/TextBuffer.hpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy_gl_lib/Types.hpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy_gl_lib/VertexBufferBase.hpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy_gl_lib/VertexBufferLines.hpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy_gl_lib/VertexBufferStars.hpp
 )
 
-set(EXE_SRC_FILES
-  src/main.cpp 
+set(GALAXY_RENDERER_SRC
+	${CMAKE_CURRENT_SOURCE_DIR}/src/galaxy_gl_lib/Galaxy.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/src/galaxy_gl_lib/CumulativeDistributionFunction.cpp
+	)
+
+add_library(galaxy_lib)
+target_sources(galaxy_lib
+	PRIVATE
+	${GALAXY_RENDERER_SRC}
+	)
+target_include_directories(galaxy_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/galaxy_gl_lib/)
+
+add_library(opengl_window)
+target_sources(opengl_window
+ PRIVATE
+  ${OPENGL_WINDOW_SOURCES}
+  ${OPENGL_WINDOW_MOC_SOURCES}
+  ${RCC_SOURCES}
+)
+target_include_directories(opengl_window
+ PUBLIC
+  include
+)
+target_link_libraries(opengl_window
+  ${OpenCV_LIBS}
+  ${OPENGL_LIBRARIES}
+  ${GLUT_LIBRARY}
+  GLEW::GLEW
+  Qt5::Core
+  Qt5::Widgets
+  galaxy_lib
 )
 
-add_library(qt_gl_window)
-target_sources(qt_gl_window
+
+add_executable(qtopengl_window_test)
+target_sources(qtopengl_window_test
   PRIVATE
-  ${QT_GL_WINDOW_SRC}
-  ${QT_GL_WINDOW_UISrcs}
-  ${QT_GL_WINDOW_MOCrcs}
-  ${QT_GL_Widget_SRC_FILES}
-  ${QT_GL_Widget_UISrcs}
-  ${QT_GL_Widget_MOCrcs}
+  ${MAIN_OPENGL_WINDOW_TEST__MOC_SOURCES}
+  ${MAIN_OPENGL_WINDOW_TEST_SOURCES}
 )
-target_include_directories(qt_gl_window PRIVATE include)
-target_include_directories(qt_gl_window PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
-target_include_directories(qt_gl_window SYSTEM
-  PUBLIC
+target_include_directories(qtopengl_window_test
+ PUBLIC
   ${Qt5Core_INCLUDE_DIRS}
-  ${Qt5Widgets_INCLUDE_DIRS}
+ PRIVATE
+  include
 )
-target_link_libraries(qt_gl_window PRIVATE
+target_link_libraries(qtopengl_window_test
+  opengl_window
   Qt5::Core
   Qt5::Widgets
 )
-
-#add_library(galaxy_renderer SHARED)
-#target_sources(galaxy_renderer PRIVATE
-#    ${LIB_SRC_FILES}
-#    ${GALAXY_RENDERER_HEADERS}
-#)
-#target_include_directories(galaxy_renderer PRIVATE
-#    include
-#)
-#target_include_directories(galaxy_renderer PUBLIC
-#  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>/galaxy_renderer)
-#target_include_directories(galaxy_renderer SYSTEM
-#  PUBLIC ${SDL2_INCLUDE_DIR}
-#)
-#target_link_libraries(galaxy_renderer
-#    ${SDL2_LIBRARY}
-#    GLEW::GLEW
-#    ${OPENGL_LIBRARIES}
-#    ${SDL2_TTF_LIBRARY}
-#)
-#set_target_properties(galaxy_renderer PROPERTIES PUBLIC_HEADER "${GALAXY_RENDERER_HEADERS}")
-
-#add_executable(galaxy_renderer_gui)
-#target_sources(galaxy_renderer_gui PRIVATE
-#    ${EXE_SRC_FILES}
-#)
-#target_include_directories(galaxy_renderer_gui PRIVATE
-#    include
-#)
-#target_link_libraries(galaxy_renderer_gui
-#    galaxy_renderer
-#)
-
-add_executable(qt_galaxy_renderer_gui)
-target_sources(qt_galaxy_renderer_gui PRIVATE
-	${QT_MAIN_MOCrcs}
-  ${QT_MAIN_SRC}
-	)
-target_include_directories(qt_galaxy_renderer_gui PRIVATE
-    include
-)
-target_link_libraries(qt_galaxy_renderer_gui
-  #galaxy_renderer
-	qt_gl_window
-	Qt5::OpenGL
-)
-
-
-install(TARGETS 
-#  galaxy_renderer
-#  galaxy_renderer_gui
-  qt_galaxy_renderer_gui
-  EXPORT galaxy_rendererConfig
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-  PUBLIC_HEADER DESTINATION include/galaxy_renderer
-)
-
-#export(TARGETS galaxy_renderer
-#    NAMESPACE galaxy_renderer::
-#    FILE "${CMAKE_CURRENT_BINARY_DIR}/galaxy_rendererConfig.cmake"
-#)
-
-#install(EXPORT galaxy_rendererConfig
-#    DESTINATION "${CMAKE_INSTALL_DATADIR}/galaxy_renderer/cmake"
-#    NAMESPACE galaxy_renderer::
-#)
