@@ -5,6 +5,7 @@
 #include <SDL2/SDL_opengl.h>
 #include <SDL2/SDL_ttf.h>
 
+#include <glm/fwd.hpp>
 #include <glm/glm.hpp>
 #include <string>
 
@@ -46,7 +47,8 @@ class SDLWindow {
   int GetFPS() const;
   void ScaleAxis(float scale);
   double GetFOV() const;
-  glm::vec2 GetWindowPos(GLfloat x, GLfloat y, GLfloat z);
+  glm::vec2 GetWindowPos(GLfloat x, GLfloat y, GLfloat z,
+                         glm::mat4 matProjection, int width, int height);
 
   SDL_Event _event;
 

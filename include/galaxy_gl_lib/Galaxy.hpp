@@ -26,7 +26,6 @@ class Galaxy final {
   ~Galaxy();
 
   void Reset(GalaxyParam param);
-
   const std::vector<Star>& GetStars() const;
 
   float GetRad() const;

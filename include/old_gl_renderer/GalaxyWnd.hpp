@@ -57,8 +57,8 @@ class GalaxyWnd final : public SDLWindow {
 
   uint32_t _renderUpdateHint;
 
-  VertexBufferLines _vertDensityWaves;
   VertexBufferLines _vertAxis;
+  VertexBufferLines _vertDensityWaves;
   VertexBufferLines _vertVelocityCurve;
   VertexBufferStars _vertStars;
 

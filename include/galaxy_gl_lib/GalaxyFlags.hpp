@@ -2,8 +2,8 @@
 #define DISPLAY_FLAG_H
 
 #include <cstdint>
-class DisplayFlag {
- private:
+class GalaxyFlags {
+ public:
   enum class DisplayItem : uint32_t {
     NONE = 0,
     AXIS = 1 << 1,
@@ -24,19 +24,10 @@ class DisplayFlag {
     ruhSTARS = 1 << 3,
     ruhDUST = 1 << 4,
     ruhCREATE_VELOCITY_CURVE = 1 << 5,
-    ruhCREATE_TEXT = 1 << 7
+    ruhCREATE_TEXT = 1 << 6
   };
-
-  uint32_t _renderUpdateHint;
-  uint32_t _flags;
-
-  bool getDisplayFlag(DisplayItem res_flag);
-  bool getRenderFlag(RenderUpdateHint res_flag);
-  void setDisplayFlag(DisplayItem res_flag);
-  void setRenderFlag(RenderUpdateHint res_flag);
-
- public:
-  DisplayFlag();
+  GalaxyFlags();
+  virtual ~GalaxyFlags();
   // Display Flag Setter and Getter
 
   void setDisplayNoneFlag(bool flag);
@@ -64,21 +55,30 @@ class DisplayFlag {
 
   // RenderUpdate Flag Setter and Getter
 
-  void setRenderNoneFlag(bool flag);
-  void setRenderAxisFlag(bool flag);
-  void setRenderStarFlag(bool flag);
-  void setRenderDesityWavesFlag(bool flag);
-  void setRenderVelocityFlag(bool flag);
-  void setRenderDustFlag(bool flag);
-  void setRenderTextFlag(bool flag);
+  void setUpdateNoneFlag(bool flag);
+  void setUpdateAxisFlag(bool flag);
+  void setUpdateStarFlag(bool flag);
+  void setUpdateDensityWavesFlag(bool flag);
+  void setUpdateVelocityFlag(bool flag);
+  void setUpdateDustFlag(bool flag);
+  void setUpdateTextFlag(bool flag);
 
-  bool getRenderNoneFlag();
-  bool getRenderAxisFlag();
-  bool getRenderStarFlag();
-  bool getRenderDesityWavesFlag();
-  bool getRenderVelocityFlag();
-  bool getRenderDustFlag();
-  bool getRenderTextFlag();
-  virtual ~DisplayFlag();
+  bool getUpdateNoneFlag();
+  bool getUpdateAxisFlag();
+  bool getUpdateStarFlag();
+  bool getUpdateDensityWavesFlag();
+  bool getUpdateVelocityFlag();
+  bool getUpdateDustFlag();
+  bool getUpdateTextFlag();
+ private:
+
+  uint32_t _renderUpdateHint;
+  uint32_t _flags;
+
+  bool getDisplayFlag(DisplayItem res_flag);
+  bool getUpdateFlag(RenderUpdateHint res_flag);
+  void setDisplayFlag(DisplayItem res_flag);
+  void setUpdateFlag(RenderUpdateHint res_flag);
+
 };
 #endif /* DISPLAY_FLAG_H*/

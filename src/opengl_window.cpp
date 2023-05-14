@@ -23,16 +23,6 @@ void printShaderInfoLog(GLuint obj);
 void printProgramInfoLog(GLuint obj);
 
 // Helper function for
-/* glm::vec2 getWindwPos(GLfloat x, GLfloat y, GLfloat z, glm::mat4
- * matProjection, */
-/*                       int height, int width) { */
-/*   glm::vec3 pos = glm::vec3(x, y, z); */
-/*   glm::mat4 matModel = glm::mat4(1.0); */
-/*   glm::vec4 viewPort = glm::vec4(0.0f, 0.0f, (float)width, (float)height); */
-/*   glm::vec3 projected = glm::project(pos, matModel, matProjection, viewPort);
- */
-/*   return glm::vec2(projected.x, projected.y); */
-/* } */
 
 void OpenGlWindow::adjustCamera() {
   double l = _fov / 2.0;
@@ -71,19 +61,16 @@ OpenGlWindow::~OpenGlWindow() {
   /* // since we release resources related to an OpenGL context, */
   /* // we make this context current before cleaning up our resources */
   /**/
-  /* m_vao.destroy(); */
-  /* m_vertexBufferObject.destroy(); */
-  /* delete m_program; */
+  cycleTimer.stop();
+  m_context->makeCurrent(this);
   this->releaseVertBuffer();
 }
 
 void OpenGlWindow::releaseVertBuffer() {
-  m_context->makeCurrent(this);
   _vertStars.Release();
   /* _vertDensityWaves.Release(); */
   /* _vertVelocityCurve.Release(); */
 }
-
 
 void OpenGlWindow::initialize() {
   GLenum err = glewInit();
