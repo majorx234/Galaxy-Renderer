@@ -49,7 +49,7 @@ class OpenGlWindow : public QWindow, protected QOpenGLFunctions {
   /* QOpenGLShaderProgram *m_program; */
   bool needsInitialize;
 
-  const float TimeStepSize = 200000.0f;
+  const float TimeStepSize = 100000.0f;
 
   void releaseVertBuffer();
 

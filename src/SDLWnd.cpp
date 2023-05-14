@@ -5,7 +5,6 @@
 #include <cmath>
 #include <ctime>
 #include <fstream>
-#include <glm/fwd.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/mat4x4.hpp>
@@ -22,13 +21,11 @@
 #include "SDL_timer.h"
 #include "SDL_video.h"
 
-glm::vec2 SDLWindow::GetWindowPos(GLfloat x, GLfloat y, GLfloat z,
-                                  glm::mat4 matProjection, int height,
-                                  int width) {
+glm::vec2 SDLWindow::GetWindowPos(GLfloat x, GLfloat y, GLfloat z) {
   glm::vec3 pos = glm::vec3(x, y, z);
   glm::mat4 matModel = glm::mat4(1.0);
-  glm::vec4 viewPort = glm::vec4(0.0f, 0.0f, (float)width, (float)height);
-  glm::vec3 projected = glm::project(pos, matModel, matProjection, viewPort);
+  glm::vec4 viewPort = glm::vec4(0.0f, 0.0f, (float)_width, (float)_height);
+  glm::vec3 projected = glm::project(pos, matModel, _matProjection, viewPort);
   return glm::vec2(projected.x, projected.y);
 }
 
@@ -78,7 +75,7 @@ void SDLWindow::InitFullscreen(float axisLen, const std::string& caption) {
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
   //	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
-  // SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
+  //SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
   //	SDL_DisplayMode dm;
@@ -131,7 +128,7 @@ void SDLWindow::Init(int width, int height, float axisLen,
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
   //	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
-  // SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
+  //SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
   _pSdlWnd = SDL_CreateWindow(caption.c_str(), SDL_WINDOWPOS_UNDEFINED,

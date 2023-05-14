@@ -188,7 +188,7 @@ void GalaxyWnd::UpdateText() {
   int line = 0;
   float y = y0 - 60;
 
-   y0 = 60;
+  y0 = 60;
   float dy1 = _textHelp.GetFontSize(1) + 8;
   float dy2 = _textHelp.GetFontSize(2) + 6;
 
